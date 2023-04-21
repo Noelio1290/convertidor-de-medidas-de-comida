@@ -18,7 +18,7 @@ const stringConverter = ( portionFood ) => {
   const numberOfSrtring = portionFood.match(findIntegerInString);
   if(numberOfSrtring){
     numberInString = numberOfSrtring[0];
-    totalGrams = numberInString * tbsp
+    totalGrams = (numberInString * (lookingForWordTbsp >0 ? tbsp : tsp))
   }
 
   // Find fraction in string
@@ -28,7 +28,7 @@ const stringConverter = ( portionFood ) => {
     numerador = fractionOfString[1]
     denominador = fractionOfString[2]
     fractionInString = numerador / denominador ;
-    totalGrams = Math.ceil(fractionInString * tbsp)
+    totalGrams = Math.ceil((fractionInString * (lookingForWordTbsp >0 ? tbsp : tsp)))
   }
  
   if (lookingForWordTbsp >= 0) {
@@ -43,5 +43,6 @@ const stringConverter = ( portionFood ) => {
 };
 
 stringConverter("2 tbsp of butter")
+stringConverter("2 tsp of salt")
 stringConverter("1/2 tbsp of oregane")
 stringConverter("1/2 tsp of salt")
