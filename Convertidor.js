@@ -1,9 +1,7 @@
-const stringConverter = ( portionFood ) => {
+const convertRecipe = ( recipe ) => {
   //find tbsp and tsp in string
-  const lookingForWordTbsp =  portionFood.indexOf("tbsp")
-  const lookingForWordTsp =  portionFood.indexOf("tsp")
-  console.log(lookingForWordTbsp)
-  console.log(lookingForWordTsp)
+  const lookingForWordTbsp =  recipe.indexOf("tbsp")
+  const lookingForWordTsp =  recipe.indexOf("tsp")
 
   const tbsp = 15;
   const tsp = 5;
@@ -12,10 +10,10 @@ const stringConverter = ( portionFood ) => {
   let totalGrams = null
   let numerador = null
   let denominador = null
-
+  let finalString = ""
   // Find integer in string
   const findIntegerInString = /\d+(\.\d+)?/;
-  const numberOfSrtring = portionFood.match(findIntegerInString);
+  const numberOfSrtring = recipe.match(findIntegerInString);
   if(numberOfSrtring){
     numberInString = numberOfSrtring[0];
     totalGrams = (numberInString * (lookingForWordTbsp >0 ? tbsp : tsp))
@@ -23,7 +21,7 @@ const stringConverter = ( portionFood ) => {
 
   // Find fraction in string
   const findFractionInString = /(\d+)\/(\d+)/;
-  const fractionOfString = portionFood.match(findFractionInString);
+  const fractionOfString = recipe.match(findFractionInString);
   if(fractionOfString){
     numerador = fractionOfString[1]
     denominador = fractionOfString[2]
@@ -33,16 +31,17 @@ const stringConverter = ( portionFood ) => {
  
   if (lookingForWordTbsp >= 0) {
     // remplaza "tbsp" por 'tbsp ${tbsp}g)'
-    let currentportionFood = portionFood.slice(0, lookingForWordTbsp) + `tbsp ${totalGrams}g` + portionFood.slice(lookingForWordTbsp + 4);
-    console.log(currentportionFood)
+    finalString = recipe.slice(0, lookingForWordTbsp) + `tbsp ${totalGrams}g` + recipe.slice(lookingForWordTbsp + 4);
+    console.log(finalString)
   }else if(lookingForWordTsp >= 0){
     // remplaza "tsp" por 'tsp ${tbsp}g)'
-    let currentportionFood = portionFood.slice(0, lookingForWordTsp) + `tsp ${totalGrams}g` + portionFood.slice(lookingForWordTsp + 3);
-    console.log(currentportionFood)
+    finalString = recipe.slice(0, lookingForWordTsp) + `tsp ${totalGrams}g` + recipe.slice(lookingForWordTsp + 3);
+    console.log(finalString)
   }
+  return finalString
 };
 
-stringConverter("2 tbsp of butter")
-stringConverter("2 tsp of salt")
-stringConverter("1/2 tbsp of oregane")
-stringConverter("1/2 tsp of salt")
+convertRecipe("2 tbsp of butter")
+convertRecipe("2 tsp of salt")
+convertRecipe("1/2 tbsp of oregane")
+convertRecipe("1/2 tsp of salt")
