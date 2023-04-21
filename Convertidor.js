@@ -1,4 +1,9 @@
 const stringConverter = ( portionFood ) => {
+  //find tbsp and tsp in string
+  const lookingForWordTbsp =  portionFood.indexOf("tbsp")
+  const lookingForWordTsp =  portionFood.indexOf("tsp")
+  console.log(lookingForWordTbsp)
+  console.log(lookingForWordTsp)
 
   const tbsp = 15;
   const tsp = 5;
@@ -25,10 +30,6 @@ const stringConverter = ( portionFood ) => {
     fractionInString = numerador / denominador ;
     totalGrams = Math.ceil(fractionInString * tbsp)
   }
-
-  //find tbsp in string
-  const lookingForWordTbsp =  portionFood.indexOf("tbsp")
-  const lookingForWordTsp =  portionFood.indexOf("tsp")
  
   if (lookingForWordTbsp >= 0) {
     // remplaza "tbsp" por 'tbsp ${tbsp}g)'
@@ -36,10 +37,11 @@ const stringConverter = ( portionFood ) => {
     console.log(currentportionFood)
   }else if(lookingForWordTsp >= 0){
     // remplaza "tsp" por 'tsp ${tbsp}g)'
-    let currentportionFood = portionFood.slice(0, lookingForWordTbsp) + `tsp ${totalGrams}g` + portionFood.slice(lookingForWordTbsp + 4);
+    let currentportionFood = portionFood.slice(0, lookingForWordTsp) + `tsp ${totalGrams}g` + portionFood.slice(lookingForWordTsp + 3);
     console.log(currentportionFood)
   }
 };
 
 stringConverter("2 tbsp of butter")
 stringConverter("1/2 tbsp of oregane")
+stringConverter("1/2 tsp of salt")
